@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InsureFlowAIDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_About">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionHeading" Type="nvarchar" MaxLength="100" />
+          <Property Name="Paragraph1" Type="nvarchar(max)" />
+          <Property Name="Paragraph2" Type="nvarchar(max)" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="Vision" Type="nvarchar" MaxLength="500" />
+          <Property Name="Mission" Type="nvarchar" MaxLength="500" />
+          <Property Name="Value" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Tbl_CarouselItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WelcomeText" Type="nchar" MaxLength="100" />
+          <Property Name="Headline" Type="nchar" MaxLength="250" />
+          <Property Name="SubHeadline" Type="nchar" MaxLength="250" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Tbl_FAQ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionTitle" Type="nchar" MaxLength="50" />
+          <Property Name="AnswerContent" Type="nchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Tbl_Features">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="20" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tbl_Services">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="Description" Type="nchar" MaxLength="50" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="InsureFlowAIDBModelStoreContainer">
+          <EntitySet Name="Tbl_About" EntityType="Self.Tbl_About" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_CarouselItems" EntityType="Self.Tbl_CarouselItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_FAQ" EntityType="Self.Tbl_FAQ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Features" EntityType="Self.Tbl_Features" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Services" EntityType="Self.Tbl_Services" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InsureFlowAIDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_About">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionHeading" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Paragraph1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Paragraph2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Vision" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Mission" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tbl_FAQ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionTitle" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="AnswerContent" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tbl_Features">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Tbl_Services">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="InsureFlowAIDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_About" EntityType="Self.Tbl_About" />
+          <EntitySet Name="Tbl_FAQ" EntityType="Self.Tbl_FAQ" />
+          <EntitySet Name="Tbl_Features" EntityType="Self.Tbl_Features" />
+          <EntitySet Name="Tbl_Services" EntityType="Self.Tbl_Services" />
+          <EntitySet Name="Tbl_CarouselItems" EntityType="InsureFlowAIDBModel.Tbl_CarouselItems" />
+        </EntityContainer>
+        <EntityType Name="Tbl_CarouselItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WelcomeText" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Headline" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="SubHeadline" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InsureFlowAIDBModelStoreContainer" CdmEntityContainer="InsureFlowAIDBEntities">
+          <EntitySetMapping Name="Tbl_About">
+            <EntityTypeMapping TypeName="InsureFlowAIDBModel.Tbl_About">
+              <MappingFragment StoreEntitySet="Tbl_About">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SectionHeading" ColumnName="SectionHeading" />
+                <ScalarProperty Name="Paragraph1" ColumnName="Paragraph1" />
+                <ScalarProperty Name="Paragraph2" ColumnName="Paragraph2" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Vision" ColumnName="Vision" />
+                <ScalarProperty Name="Mission" ColumnName="Mission" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_FAQ">
+            <EntityTypeMapping TypeName="InsureFlowAIDBModel.Tbl_FAQ">
+              <MappingFragment StoreEntitySet="Tbl_FAQ">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="QuestionTitle" ColumnName="QuestionTitle" />
+                <ScalarProperty Name="AnswerContent" ColumnName="AnswerContent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Features">
+            <EntityTypeMapping TypeName="InsureFlowAIDBModel.Tbl_Features">
+              <MappingFragment StoreEntitySet="Tbl_Features">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Services">
+            <EntityTypeMapping TypeName="InsureFlowAIDBModel.Tbl_Services">
+              <MappingFragment StoreEntitySet="Tbl_Services">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CarouselItems">
+            <EntityTypeMapping TypeName="InsureFlowAIDBModel.Tbl_CarouselItems">
+              <MappingFragment StoreEntitySet="Tbl_CarouselItems">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="SubHeadline" ColumnName="SubHeadline" />
+                <ScalarProperty Name="Headline" ColumnName="Headline" />
+                <ScalarProperty Name="WelcomeText" ColumnName="WelcomeText" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

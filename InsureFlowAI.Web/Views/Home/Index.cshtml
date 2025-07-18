@@ -1,0 +1,39 @@
+﻿@model InsureFlowAI.Web.ViewModels.HomePageViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@Html.Partial("_HeadComponentPartial")
+
+<body>
+
+    @Html.Partial("_SpinnerComponentPartial")
+
+    @Html.Partial("_TopbarComponentPartial")
+
+
+    @Html.Partial("_HeaderComponentPartial",Model.CarouselItems)
+
+
+    @Html.Partial("_FeatureComponentPartial")
+
+
+    @Html.Partial("_AboutComponentPartial")
+
+
+    @Html.Partial("_ServiceComponentPartial")
+
+    @Html.Partial("_FAQComponentPartial")
+
+
+    @Html.Partial("_FooterComponentPartial")
+
+    @Html.Partial("_ScriptsComponentPartial")
+
+</body>
+
+</html>
