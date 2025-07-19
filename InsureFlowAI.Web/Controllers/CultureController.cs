@@ -13,7 +13,7 @@ namespace InsureFlowAI.Web.Controllers
         {
             if (CultureHelper.IsValidCulture(culture))
             {
-                // Cookie'ye kültür bilgisini kaydet
+                
                 var cookie = new HttpCookie("_culture", culture)
                 {
                     Expires = DateTime.Now.AddYears(1),
@@ -21,11 +21,11 @@ namespace InsureFlowAI.Web.Controllers
                 };
                 Response.Cookies.Add(cookie);
 
-                // Thread'e kültürü uygula
+                
                 CultureHelper.SetCulture(culture);
             }
 
-            // Geri dönülecek URL'i kontrol et
+            
             if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
             {
                 returnUrl = Url.Action("Index", "Home");
