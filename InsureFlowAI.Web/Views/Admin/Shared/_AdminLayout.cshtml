@@ -1,0 +1,23 @@
+﻿<!doctype html>
+<html lang="en">
+@Html.Partial("/Views/Admin/Shared/PartialHead.cshtml")
+
+<body>
+
+<div class="wrapper d-flex align-items-stretch">
+
+    @Html.Partial("/Views/Admin/Shared/PartialSidebar.cshtml")
+
+    <div id="content" class="p-4 p-md-5 pt-5">
+        @RenderBody()
+    </div>
+</div>
+@RenderSection("Scripts", required: false)
+<script src="/sidebar-03/js/jquery.min.js"></script>
+<script src="/sidebar-03/js/popper.js"></script>
+<script src="/sidebar-03/js/bootstrap.min.js"></script>
+<script src="/sidebar-03/js/main.js"></script>
+
+
+</body>
+</html>

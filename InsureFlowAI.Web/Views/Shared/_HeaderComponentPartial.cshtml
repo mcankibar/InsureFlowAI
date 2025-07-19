@@ -3,7 +3,7 @@
 @model List<InsureFlowAI.Web.ViewModels.CarouselVM>
 
 <div class="header-carousel owl-carousel">
-    @if (Model != null && Model.Any()) // Modelin boş olup olmadığını kontrol edin
+    @if (Model != null && Model.Any()) 
     {
         foreach (var item in Model)
         {

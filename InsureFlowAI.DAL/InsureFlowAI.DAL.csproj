@@ -55,59 +55,66 @@
   <ItemGroup>
     <Compile Include="Abstract\IAboutDal.cs" />
     <Compile Include="Abstract\ICarouselDal.cs" />
+    <Compile Include="Abstract\IFAQDal.cs" />
     <Compile Include="Abstract\IGenericDal.cs" />
-    <Compile Include="DataModel\InsureFlowAIModel.Context.cs">
+    <Compile Include="Abstract\IServicesDal.cs" />
+    <Compile Include="EntityFramework\EfFAQDal.cs" />
+    <Compile Include="EntityFramework\EfServicesDal.cs" />
+    <Compile Include="Models\DataModel\InsureFlowAIModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InsureFlowAIModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\InsureFlowAIModel.cs">
+    <Compile Include="Models\DataModel\InsureFlowAIModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InsureFlowAIModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\InsureFlowAIModel.Designer.cs">
+    <Compile Include="Models\DataModel\InsureFlowAIModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InsureFlowAIModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\EfCarouselDal.cs" />
+    <Compile Include="Models\DataModel\sysdiagrams.cs">
+      <DependentUpon>InsureFlowAIModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataModel\Tbl_About.cs">
+    <Compile Include="Models\DataModel\Tbl_About.cs">
       <DependentUpon>InsureFlowAIModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\Tbl_CarouselItems.cs">
+    <Compile Include="Models\DataModel\Tbl_CarouselItems.cs">
       <DependentUpon>InsureFlowAIModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\Tbl_FAQ.cs">
+    <Compile Include="Models\DataModel\Tbl_FAQ.cs">
       <DependentUpon>InsureFlowAIModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\Tbl_Features.cs">
+    <Compile Include="Models\DataModel\Tbl_Features.cs">
       <DependentUpon>InsureFlowAIModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\Tbl_Services.cs">
+    <Compile Include="Models\DataModel\Tbl_Services.cs">
       <DependentUpon>InsureFlowAIModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Repositories\GenericRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="DataModel\InsureFlowAIModel.edmx">
+    <EntityDeploy Include="Models\DataModel\InsureFlowAIModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>InsureFlowAIModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DataModel\InsureFlowAIModel.edmx.diagram">
+    <None Include="Models\DataModel\InsureFlowAIModel.edmx.diagram">
       <DependentUpon>InsureFlowAIModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataModel\InsureFlowAIModel.Context.tt">
+    <Content Include="Models\DataModel\InsureFlowAIModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>InsureFlowAIModel.edmx</DependentUpon>
       <LastGenOutput>InsureFlowAIModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataModel\InsureFlowAIModel.tt">
+    <Content Include="Models\DataModel\InsureFlowAIModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>InsureFlowAIModel.edmx</DependentUpon>
       <LastGenOutput>InsureFlowAIModel.cs</LastGenOutput>

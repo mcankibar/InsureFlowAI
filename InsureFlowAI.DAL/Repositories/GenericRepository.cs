@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InsureFlowAI.DAL.Abstract;
-using InsureFlowAI.DAL.DataModel;
+using InsureFlowAI.DAL.Models.DataModel;
 
 namespace InsureFlowAI.DAL.Repositories
 {

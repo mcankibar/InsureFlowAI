@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InsureFlowAI.DAL.DataModel;
+using InsureFlowAI.DAL.Models.DataModel;
 
 namespace InsureFlowAI.DAL.Abstract
 {

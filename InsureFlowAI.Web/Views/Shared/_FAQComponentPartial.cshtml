@@ -1,4 +1,6 @@
-﻿<div class="container-fluid faq-section bg-light py-5">
+﻿@model List<InsureFlowAI.DAL.Models.DataModel.Tbl_FAQ>
+
+<div class="container-fluid faq-section bg-light py-5">
     <div class="container py-5">
         <div class="row g-5 align-items-center">
             <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
@@ -8,24 +10,41 @@
                         <h1 class="display-4 mb-0">Common Frequently Asked Questions</h1>
                     </div>
                     <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Q: What happens during Freshers' Week?
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show active" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body rounded">
-                                    A: Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
+                        @{
+                            int i = 0; 
+                        }
+                        @foreach (var faq in Model)
+                        {
+                            var headingId = "heading" + i;
+                            var collapseId = "collapse" + i;
+                            var isFirstItem = (i == 0);
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="@headingId">
+                                    <button class="accordion-button border-0 @(isFirstItem ? "" : "collapsed")"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#@collapseId"
+                                            aria-expanded="@(isFirstItem ? "true" : "false")"
+                                            aria-controls="@collapseId">
+                                        Q: @faq.QuestionTitle
+                                    </button>
+                                </h2>
+                                <div id="@collapseId" class="accordion-collapse collapse @(isFirstItem ? "show active" : "")"
+                                     aria-labelledby="@headingId"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body rounded">
+                                        A: @faq.AnswerContent
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                            i++; 
+                        }
                     </div>
                 </div>
             </div>
             <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.4s">
-                <img src="img/carousel-2.png" class="img-fluid w-100" alt="">
+                <img src="https://t3.ftcdn.net/jpg/02/30/58/12/360_F_230581296_ij8VjSzEmGDlLhDiy6MSlJRR6AvIvcOT.jpg" class="img-fluid w-100" alt="FAQ Image"> 
             </div>
         </div>
     </div>

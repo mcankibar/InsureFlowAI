@@ -13,7 +13,7 @@
 
     @Html.Partial("_SpinnerComponentPartial")
 
-    @Html.Partial("_TopbarComponentPartial")
+    @Html.Partial("_TopBarComponentPartial",Model.LinkedInProfileVM)
 
 
     @Html.Partial("_HeaderComponentPartial",Model.CarouselItems)
@@ -25,9 +25,9 @@
     @Html.Partial("_AboutComponentPartial")
 
 
-    @Html.Partial("_ServiceComponentPartial")
+    @Html.Partial("_ServiceComponentPartial",Model.ServicesList)
 
-    @Html.Partial("_FAQComponentPartial")
+    @Html.Partial("_FAQComponentPartial", Model.FAQList)
 
 
     @Html.Partial("_FooterComponentPartial")

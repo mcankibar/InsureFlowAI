@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using InsureFlowAI.Web.Filters;
 
 namespace InsureFlowAI.Web
 {
@@ -8,6 +9,7 @@ namespace InsureFlowAI.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new CultureActionFilter());
         }
     }
 }

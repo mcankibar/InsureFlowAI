@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using InsureFlowAI.Web.Helpers;
 
 namespace InsureFlowAI.Web
 {
@@ -17,6 +18,12 @@ namespace InsureFlowAI.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Application_BeginRequest()
+        {
+            string culture = CultureHelper.GetCultureFromRequest(new HttpRequestWrapper(Request));
+            CultureHelper.SetCulture(culture);
         }
     }
 }

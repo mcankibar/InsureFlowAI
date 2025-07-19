@@ -1,0 +1,448 @@
+﻿@model InsureFlowAI.Web.ViewModels.AdminVM
+@{
+    ViewBag.Title = "Admin Panel - AI Powered";
+    Layout = "~/Views/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex align-items-center mb-3">
+                <h2 class="me-3">
+                    <i class="fas fa-robot text-primary me-2"></i>
+                    AI Powered Admin Panel
+                </h2>
+                <span class="badge bg-gradient-primary px-3 py-2">
+                    <i class="fas fa-magic me-1"></i>AI Enhanced
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Management Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-cogs me-2"></i>
+                        Services Management
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <!-- Services List -->
+                    <div class="mb-4">
+                        <h5 class="card-title">
+                            <i class="fas fa-list me-2 text-primary"></i>
+                            Current Services
+                        </h5>
+                        @if (Model.servicesList != null && Model.servicesList.Any())
+                        {
+                            <div class="row">
+                                @foreach (var service in Model.servicesList)
+                                {
+                                    <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="card h-100 border-left-primary shadow-sm">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                                    <span class="badge bg-primary">#@service.ID</span>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Edit</a></li>
+                                                            <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Delete</a></li>
+                                                            <li><hr class="dropdown-divider"></li>
+                                                            <li><a class="dropdown-item" href="#"><i class="fas fa-magic me-2"></i>AI Regenerate</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <h6 class="card-title">@service.Name</h6>
+                                                <p class="card-text text-muted small">
+                                                    @(service.Description?.Length > 80 ? service.Description.Substring(0, 80) + "..." : service.Description)
+                                                </p>
+                                                @if (!string.IsNullOrEmpty(service.ImageUrl))
+                                                {
+                                                    <div class="text-center">
+                                                        <img src="@service.ImageUrl" alt="Service Image" class="img-fluid rounded" style="max-height: 120px; object-fit: cover;">
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="text-center p-3 bg-light rounded">
+                                                        <i class="fas fa-image text-muted fa-2x"></i>
+                                                        <p class="text-muted small mb-0 mt-1">No Image</p>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info border-0 shadow-sm">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-info-circle fa-2x me-3 text-info"></i>
+                                    <div>
+                                        <h6 class="mb-1">No services found</h6>
+                                        <p class="mb-0 small">Start by creating your first AI-powered service below!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- AI Service Creator -->
+                    <div class="border-top pt-4">
+                        <h5 class="card-title">
+                            <i class="fas fa-magic me-2 text-success"></i>
+                            AI Service Creator
+                        </h5>
+                        @using (Html.BeginForm("CreateNewService", "Admin", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="serviceName" class="form-label">Service Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="serviceName" name="Name" required>
+                                        <div class="invalid-feedback">Please provide a service name.</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="serviceDescription" class="form-label">Description <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="serviceDescription" name="Description" rows="3" required placeholder="Enter service description..."></textarea>
+                                <div class="invalid-feedback">Please provide a description.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    <i class="fas fa-image me-1"></i>AI Image Generation
+                                </label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-gradient-primary w-100" onclick="generateImage()">
+                                            <i class="fas fa-palette me-1"></i>Generate Image
+                                        </button>
+                                        <small class="form-text text-muted mt-2">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            AI will create an image based on your service description.
+                                        </small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="imageContainer" class="border rounded p-3 text-center" style="min-height: 220px; display: flex; align-items: center; justify-content: center;">
+                                            <div id="noImageYet">
+                                                <i class="fas fa-image text-muted fa-2x"></i>
+                                                <p class="text-muted small mb-0 mt-1">No image generated yet</p>
+                                            </div>
+                                            
+                                            <div id="imageLoading" style="display: none;">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="visually-hidden">Generating...</span>
+                                                </div>
+                                                <p class="text-muted small mt-2">AI is creating your image...</p>
+                                            </div>
+                                            
+                                            <div id="imagePreview" style="display: none;">
+                                                <img id="generatedImage" class="img-fluid rounded shadow" style="max-height: 200px; max-width: 100%; object-fit: cover;">
+                                                <p class="text-success small mt-2 mb-0">
+                                                    <i class="fas fa-check"></i> Generated!
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="serviceImageUrl" name="ImageUrl">
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-plus me-2"></i>Create Service
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Management Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-success text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-question-circle me-2"></i>
+                        FAQ Management
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <!-- FAQ List -->
+                    <div class="mb-4">
+                        <h5 class="card-title">
+                            <i class="fas fa-list me-2 text-success"></i>
+                            Current FAQs
+                        </h5>
+                        @if (Model.faqList != null && Model.faqList.Any())
+                        {
+                            <div class="accordion" id="faqAccordion">
+                                @for (int i = 0; i < Model.faqList.Count; i++)
+                                {
+                                    var faq = Model.faqList[i];
+                                    <div class="accordion-item mb-2">
+                                        <h2 class="accordion-header" id="heading@(faq.ID)">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@(faq.ID)">
+                                                <div class="d-flex justify-content-between align-items-center w-100 me-3">
+                                                    <div>
+                                                        <span class="badge bg-success me-2">#@faq.ID</span>
+                                                        <strong>@faq.QuestionTitle</strong>
+                                                    </div>
+                                                    <div class="dropdown" onclick="event.stopPropagation();">
+                                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Edit</a></li>
+                                                            <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Delete</a></li>
+                                                            <li><hr class="dropdown-divider"></li>
+                                                            <li><a class="dropdown-item" href="#"><i class="fas fa-magic me-2"></i>AI Improve</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse@(faq.ID)" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                <p class="mb-0">@faq.AnswerContent</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info border-0 shadow-sm">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-info-circle fa-2x me-3 text-info"></i>
+                                    <div>
+                                        <h6 class="mb-1">No FAQs found</h6>
+                                        <p class="mb-0 small">Create your first AI-generated FAQ below!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- AI FAQ Generator -->
+                    <div class="border-top pt-4">
+                        <h5 class="card-title">
+                            <i class="fas fa-brain me-2 text-info"></i>
+                            AI FAQ Generator
+                        </h5>
+                        @using (Html.BeginForm("CreateNewFAQ", "Admin", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+                        {
+                            <div class="mb-4 text-center">
+                                <button type="button" class="btn btn-gradient-primary btn-lg px-5" onclick="generateFAQ()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 50px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4); transform: scale(1); transition: all 0.3s ease;">
+                                    <i class="fas fa-magic me-3 fa-lg"></i>
+                                    <strong style="font-size: 1.2em;">🚀 Generate AI FAQ</strong>
+                                </button>
+                                <div class="mt-3">
+                                    <p class="text-muted mb-1">
+                                        <i class="fas fa-sparkles me-2"></i>
+                                        <strong>Fully Automated AI FAQ Creation</strong>
+                                    </p>
+                                    <small class="text-muted">
+                                        AI will automatically choose a relevant insurance topic and create a complete FAQ
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="faqTopic" class="form-label">Generated Topic</label>
+                                        <input type="text" class="form-control" id="faqTopic" readonly style="background-color: #f8f9fa;">
+                                        <small class="text-muted">AI selected topic</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="faqQuestion" class="form-label">Question Title <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="faqQuestion" name="QuestionTitle" required readonly>
+                                        <div class="invalid-feedback">Please generate a question first.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="faqAnswer" class="form-label">Answer Content <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="faqAnswer" name="AnswerContent" rows="4" required readonly></textarea>
+                                        <div class="invalid-feedback">Please generate an answer first.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="aiLoading" class="text-center mb-4" style="display: none;">
+                                <div class="spinner-border spinner-border-lg text-success" role="status">
+                                    <span class="visually-hidden">AI is working...</span>
+                                </div>
+                                <h5 class="text-success mt-3">
+                                    <i class="fas fa-cogs me-2"></i>
+                                    AI is crafting your perfect FAQ...
+                                </h5>
+                                <p class="text-muted">This may take a few seconds</p>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-success btn-lg" id="createFaqBtn" disabled>
+                                    <i class="fas fa-plus me-2"></i>Create FAQ
+                                </button>
+                                <small class="text-muted text-center mt-2">Generate FAQ content first to enable this button</small>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-gradient-primary {
+        background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%);
+    }
+    .bg-gradient-success {
+        background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%);
+    }
+    .border-left-primary {
+        border-left: 4px solid #5e72e4;
+    }
+    .card {
+        border-radius: 15px;
+    }
+    .btn-gradient-primary {
+        background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%);
+        color: white;
+        border: none;
+    }
+    .btn-gradient-primary:hover {
+        background: linear-gradient(87deg, #4c63d2 0, #7048d6 100%);
+        color: white;
+        transform: scale(1.05) !important;
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6) !important;
+    }
+</style>
+
+<script>
+    // AI Enhancement functions
+    async function generateImage() {
+        const description = document.getElementById('serviceDescription').value;
+        if (!description.trim()) {
+            alert('Please enter a service description first!');
+            return;
+        }
+
+        // Service description'dan otomatik prompt oluştur
+        const prompt = `${description.trim()}. According to this description, create a professional, high-quality image for insurance service marketing`;
+
+        document.getElementById('imageLoading').style.display = 'block';
+        document.getElementById('imagePreview').style.display = 'none';
+        document.getElementById('noImageYet').style.display = 'none';
+
+        try {
+            const response = await fetch('/Admin/GenerateImage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({ prompt: prompt })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Resmi göster
+                document.getElementById('generatedImage').src = result.imageUrl;
+                document.getElementById('serviceImageUrl').value = result.imageUrl;
+                document.getElementById('imageLoading').style.display = 'none';
+                document.getElementById('imagePreview').style.display = 'block';
+                
+                // Success mesajı
+                console.log('Image saved successfully at: ' + result.imageUrl);
+            } else {
+                alert('Image generation failed: ' + result.message);
+                document.getElementById('imageLoading').style.display = 'none';
+                document.getElementById('noImageYet').style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while generating the image');
+            document.getElementById('imageLoading').style.display = 'none';
+            document.getElementById('noImageYet').style.display = 'block';
+        }
+    }
+
+    async function generateFAQ() {
+        // Show loading
+        document.getElementById('aiLoading').style.display = 'block';
+        document.getElementById('createFaqBtn').disabled = true;
+        
+        // Clear fields
+        document.getElementById('faqTopic').value = '';
+        document.getElementById('faqQuestion').value = '';
+        document.getElementById('faqAnswer').value = '';
+        
+        try {
+            const response = await fetch('/Admin/GenerateRandomFAQ', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Fill form with AI generated content
+                document.getElementById('faqTopic').value = result.topic;
+                document.getElementById('faqQuestion').value = result.question;
+                document.getElementById('faqAnswer').value = result.answer;
+                
+                // Enable create button
+                document.getElementById('createFaqBtn').disabled = false;
+            } else {
+                alert('Failed to generate FAQ: ' + result.message);
+            }
+        } catch (error) {
+            alert('Error generating FAQ');
+        } finally {
+            document.getElementById('aiLoading').style.display = 'none';
+        }
+    }
+
+    // Bootstrap form validation
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+

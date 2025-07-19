@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InsureFlowAI.BLL.Services;
 using InsureFlowAI.DAL.Abstract;
-using InsureFlowAI.DAL.DataModel;
+using InsureFlowAI.DAL.Models.DataModel;
 
 namespace InsureFlowAI.BLL.Concrete
 {
