@@ -79,8 +79,32 @@
 
 ### 1. ChatGPT-42 API
 - FAQ üretimi için
-- 
 ### 2. Stable Diffusion XL
 - Görsel üretimi için
 
-- 
+## 📸 Uygulama Görselleri
+
+### 🏡 Uygulama Genel Görünümü & Sosyal Etkileşim
+
+| Uygulama Ana Görünümü | Sosyal Medya Pop-up'ı |
+|:------------------------:|:--------------------------:|
+| ![Uygulama Ana Görünümü](InsureImages/1.png) | ![Sosyal Medya Pop-up](InsureImages/2.png) |
+
+### ✨ Yapay Zeka Destekli Görsel Oluşturma
+
+| Yapay Zeka Görsel Çizdirtme | Oluşturulmuş Resim |
+|:-------------------------------:|:---------------------:|
+| ![Yapay Zeka Görsel Oluşturma Girişi](InsureImages/3.png) | ![Yapay Zeka Oluşturulmuş Resim](InsureImages/4.png) |
+
+### ➕ Hizmet Yönetimi
+
+| Servisin Eklenmesi | Ana Sayfa Servisler Görünümü |
+|:--------------------:|:---------------------------------:|
+| ![Yeni Servis Ekleme](InsureImages/5.png) | ![InsureImages/6.png) |
+
+### 🤖 Yapay Zeka Destekli SSS Oluşturma
+
+| Yapay Zekaya SSS Oluştururken | Oluşturulmuş SSS Hali |
+|:------------------------------------:|:-----------------------------:|
+| ![Yapay Zeka SSS Oluşturma Girişi](InsureImages/7.png) | ![Oluşturulmuş SSS Listesi](InsureImages/8.png) |
+
