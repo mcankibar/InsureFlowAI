@@ -100,7 +100,7 @@
 
 | Servisin Eklenmesi | Ana Sayfa Servisler Görünümü |
 |:--------------------:|:---------------------------------:|
-| ![Yeni Servis Ekleme](InsureImages/5.png) | ![InsureImages/6.png) |
+| ![Yeni Servis Ekleme](InsureImages/5.png) | ![Servis Eklenmiş Hali](InsureImages/6.png) |
 
 ### 🤖 Yapay Zeka Destekli SSS Oluşturma
 
