@@ -77,7 +77,7 @@
 
 ## 🤖 AI Modelleri ve Servisleri
 
-### 1. ChatGPT-42 API
+### 1. ChatGPT-4 API
 - FAQ üretimi için
 ### 2. Stable Diffusion XL
 - Görsel üretimi için
