@@ -5,7 +5,7 @@
 ## 🚀 Özellikler
 
 ### 🤖 Yapay Zeka Entegrasyonları
-- **Otomatik FAQ Üretimi**: ChatGPT-42 API ile sigorta konularında profesyonel soru-cevap üretimi
+- **Otomatik FAQ Üretimi**: ChatGPT-4 API ile sigorta konularında profesyonel soru-cevap üretimi
 - **İçerik İyileştirme**: Mevcut FAQ sorularını ve cevaplarını AI ile geliştirme
 - **Görsel Üretim**: Stable Diffusion ile sigorta hizmetleri için profesyonel görsel oluşturma
 - **Random FAQ Generator**: Çeşitli sigorta konularında rastgele FAQ üretimi
