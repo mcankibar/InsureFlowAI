@@ -40,11 +40,10 @@ namespace InsureFlowAI.Web.Controllers
         {
             try
             {
-                // AI'dan image data'yı al
+                
                 var imageDataUrl = await _aiImageGenerationManager.GenerateImageAsync(prompt);
                 
-                // Data URL'den base64 kısmını çıkar
-                string base64Data;
+                 string base64Data;
                 if (imageDataUrl.StartsWith("data:image/"))
                 {
                     var commaIndex = imageDataUrl.IndexOf(",");
@@ -55,14 +54,14 @@ namespace InsureFlowAI.Web.Controllers
                     base64Data = imageDataUrl; // Direkt base64 ise
                 }
 
-                // Base64'ü byte array'e çevir
+                
                 byte[] imageBytes = Convert.FromBase64String(base64Data);
 
-                // Dosya adı oluştur
+                
                 var fileName = $"service_image_{Guid.NewGuid().ToString("N").Substring(0, 8)}.jpg";
                 var uploadsPath = Server.MapPath("~/Images/Services/");
                 
-                // Klasör yoksa oluştur
+                
                 if (!Directory.Exists(uploadsPath))
                 {
                     Directory.CreateDirectory(uploadsPath);
@@ -70,11 +69,10 @@ namespace InsureFlowAI.Web.Controllers
 
                 var filePath = Path.Combine(uploadsPath, fileName);
                 
-                // Dosyayı kaydet
+                
                 System.IO.File.WriteAllBytes(filePath, imageBytes);
 
-                // Web'den erişilebilir URL oluştur
-                var imageUrl = $"/Images/Services/{fileName}";
+                 var imageUrl = $"/Images/Services/{fileName}";
 
                 return Json(new { success = true, imageUrl = imageUrl });
             }
@@ -89,7 +87,6 @@ namespace InsureFlowAI.Web.Controllers
         {
             try
             {
-                // Validasyon kontrolleri
                 if (string.IsNullOrWhiteSpace(Name))
                 {
                     TempData["Error"] = "Service name is required.";
@@ -102,7 +99,7 @@ namespace InsureFlowAI.Web.Controllers
                     return RedirectToAction(nameof(Index));
                 }
 
-                // Yeni service entity'si oluştur
+                
                 var newService = new Tbl_Services
                 {
                     Name = Name.Trim(),
@@ -110,7 +107,7 @@ namespace InsureFlowAI.Web.Controllers
                     ImageUrl = !string.IsNullOrWhiteSpace(ImageUrl) ? ImageUrl.Trim() : null
                 };
 
-                // Database'e ekle
+                
                 _servicesManager.TInsert(newService);
 
                 // Başarı mesajı
@@ -196,24 +193,24 @@ namespace InsureFlowAI.Web.Controllers
                     return RedirectToAction(nameof(Index));
                 }
 
-                // Yeni FAQ entity'si oluştur
+                
                 var newFAQ = new Tbl_FAQ
                 {
                     QuestionTitle = QuestionTitle.Trim(),
                     AnswerContent = AnswerContent.Trim()
                 };
 
-                // Database'e ekle
+               
                 _faqManager.TInsert(newFAQ);
 
-                // Başarı mesajı
+                
                 TempData["Success"] = $"FAQ has been created successfully!";
 
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                // Hata durumunda
+                
                 TempData["Error"] = $"An error occurred while creating the FAQ: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
